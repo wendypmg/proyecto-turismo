@@ -368,12 +368,12 @@ class RestauranteDetailView(DetailView):
 class RestauranteCreateView(CreateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['universidad', 'anio_inicio', 'titulo', 'finalizado']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida']
 
 class RestauranteUpdateView(UpdateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['universidad', 'anio_inicio', 'titulo', 'finalizado']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida']
 
 class RestauranteDeleteView(DeleteView):
     model = Restaurante
@@ -405,24 +405,24 @@ class MonumentoDeleteView(DeleteView):
 
 #----------SITIOS
 
-class ViajeListView(ListView):
+class SitioListView(ListView):
     model = Sitio
     template_name = "blog/sitio_list.html"
 
-class ViajeDetailView(DetailView):
+class SitioDetailView(DetailView):
     model = Sitio
     template_name = "blog/sitio_detail.html"
 
-class ViajeCreateView(CreateView):
+class SitioCreateView(CreateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
     fields = ['nombre', 'ciudad']
 
-class ViajeUpdateView(UpdateView):
+class SitioUpdateView(UpdateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
     fields = ['nombre', 'ciudad']
 
-class ViajeDeleteView(DeleteView):
+class SitioDeleteView(DeleteView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
