@@ -1,0 +1,26 @@
+{% extends "blog/index.html" %}
+{% load static %}
+{% block blog_content %}
+
+<h2>Lista de Sitios Turísticos</h2>
+<a class="card_custom" href="{% url 'blog:SitioDjangoForms' %}">Crear nuevo sitio turistico</a>
+<hr>
+</hr>
+<ul>
+    {% for sitio in sitio_list %}
+    <li>
+        {{sitio}}
+        (
+        <a href="{% url 'blog:UpdateSitio' sitio.id %}">
+            <i class="fa fa-pencil" style="color: rgb(0, 0, 190);"></i>
+        </a>
+        |
+        <a href="{% url 'blog:DeleteSitio' sitio.id %}">
+            <i class="fa fa-trash" style="color: rgb(0, 0, 100);"></i>
+        </a>
+        )
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
