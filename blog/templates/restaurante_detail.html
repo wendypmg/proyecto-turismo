@@ -1,0 +1,12 @@
+{% extends "blog/index.html" %}
+{% load static %}
+{% block blog_content %}
+
+<h2>Detalle del restaurante</h2>
+<hr></hr>
+<p><h3>nombre: {{ restaurante.nombre }}</h3></p>
+<p><h4>ciudad: {{ restaurante.ciudad }}</h4></p>
+<p><h3>tipo de comida: {{ restaurante.tipo_de_comida}}</h3></p>
+
+<p><a class="btn2 btn-primary" href="{% url 'blog:restaurante-list' %}">Regresar a la lista de restaurante</a></p>
+{% endblock %}

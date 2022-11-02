@@ -1,0 +1,17 @@
+{% extends "blog/index.html" %}
+{% load static %}
+{% block blog_content %}
+
+<h2>Formulario para editar monumento {{monumento.nombre}} </h2>
+<hr></hr>
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+    {{ monumento_form.as_p }}
+
+    <input type="submit" class="btn btn-primary" value="Guardar monumento" />
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "blog/index.html" %}
+{% load static %}
+{% block blog_content %}
+
+<h2>Eliminar restaurante</h2>
+<hr></hr>
+
+<p>Estás seguro de eliminar el restaurante: {{ restaurante.nombre}}?</p>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="btn2 btn-warning" type="submit" value="Si, eliminar.">
+    <a class="btn2 btn-primary" href="{% url 'blog:restaurante-list' %}" >Cancelar</a>
+</form>
+
+{% endblock %}

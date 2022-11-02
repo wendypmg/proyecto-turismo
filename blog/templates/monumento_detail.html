@@ -1,0 +1,11 @@
+{% extends "blog/index.html" %}
+{% load static %}
+{% block blog_content %}
+
+<h2>Detalle del monumento</h2>
+<hr></hr>
+<p><h3>empresa: {{ monumento.nombre}}</h3></p>
+<p><h4>periodo: {{ monumento.ciudad }}</h4></p>
+<p><h3>puesto: {{ monumento.fecha }}</h3></p>
+<p><a class="btn2 btn-primary" href="{% url 'blog:monumento-list' %}">Regresar a la lista de monumentos</a></p>
+{% endblock %}
