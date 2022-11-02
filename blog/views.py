@@ -368,12 +368,12 @@ class RestauranteDetailView(DetailView):
 class RestauranteCreateView(CreateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['universidad', 'anio_inicio', 'titulo', 'finalizado']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida']
 
 class RestauranteUpdateView(UpdateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['universidad', 'anio_inicio', 'titulo', 'finalizado']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida']
 
 class RestauranteDeleteView(DeleteView):
     model = Restaurante
