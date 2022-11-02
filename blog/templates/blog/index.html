@@ -10,13 +10,13 @@
         <meta name="author" content="" />
         <title>{% block title %}{{ settings.APP_NAME }}{% endblock %}</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="{% static 'blog_sab_app/assets/favicon.ico' %}" />
+        <link rel="icon" type="image/x-icon" href="{% static 'blog/assets/favicon.ico' %}" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="{% static 'blog_sab_app/css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'blog/css/styles.css' %}" rel="stylesheet" />
         <!-- Awesome fonts -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -24,10 +24,10 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
-                <a class="navbar-brand" href="{% url 'blog_sab_app:Home' %}">Home</a>
-                <a class="navbar-brand" href="{% url 'blog_sab_app:Estudios' %}">Estudios</a>
-                <a class="navbar-brand" href="{% url 'blog_sab_app:Empleos' %}">Empleos</a>
-                <a class="navbar-brand" href="{% url 'blog_sab_app:Viajes' %}">Viajes</a>
+                <a class="navbar-brand" href="{% url 'blog:Home' %}">Home</a>
+                <a class="navbar-brand" href="{% url 'blog:Restaurante' %}">Restaurante</a>
+                <a class="navbar-brand" href="{% url 'blog:Monumento' %}">Monumento</a>
+                <a class="navbar-brand" href="{% url 'blog:Sitio' %}">Sitio</a>
                 <a class="btn btn-primary" href="#login">Iniciar</a>
             </div>
         </nav>
@@ -38,9 +38,9 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5">Primera entrega <br> Proyecto blog Personal</h1>
+                            <h1 class="mb-5">Blog Personal <br>de Turismo</h1>
                             <div class="text-lg-start text-white">
-                                {% block blog_sab_app_content %}
+                                {% block blog_content %}
 
                                 {% endblock %}
                             </div>
@@ -84,7 +84,7 @@
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="{% static 'blog_sab_app/js/scripts.js' %}"></script>
+        <script src="{% static 'blog/js/scripts.js' %}"></script>
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <!-- * *                               SB Forms JS                               * *-->
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
