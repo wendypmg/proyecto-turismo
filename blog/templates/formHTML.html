@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar restaurante - Formulario HTML </title>
+</head>
+<body>
+    <form action="/blog/formHTML" method="POST">{% csrf_token %}
+
+        <p>nombre: <input type="text" name="nombre"></p>
+        <p>ciudad: <input type="number" name="ciudad"></p>
+        <p>tipo_de_comida: <input type="text" name="tipo_de_comida"></p>
+       
+        <input type="submit" value="Crear restaurante">
+
+    </form>
+</body>
+</html>
