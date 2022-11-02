@@ -1,4 +1,4 @@
-#Blog Personal de Turismo
+# Blog Personal de Turismo
 
 Se trata de una web de Turismo, donde el usuario puede loguearse e ir cargando los Sitios, Restaurantes y Monumentos que ha visitado para compartir con sus amigos.
 
