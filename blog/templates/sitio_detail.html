@@ -1,0 +1,10 @@
+{% extends "blog/index.html" %}
+{% load static %}
+{% block blog_content %}
+
+<h2>Detalle del Sitio</h2>
+<hr></hr>
+<p><h3>nombre: {{ sitio.nombre }}</h3></p>
+<p><h4>ciudad: {{ sitio.ciudad }}</h4></p>
+<p><a class="btn2 btn-primary" href="{% url 'blog:sitio-list' %}">Regresar a la lista de Sitios</a></p>
+{% endblock %}
