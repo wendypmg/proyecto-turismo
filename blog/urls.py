@@ -23,9 +23,9 @@ from blog import views
 app_name='blog'
 urlpatterns = [
     path('', views.index, name='Home'),
-    path('restaurantes', views.restaurantes, name='Estudios'),
-    path('sitios', views.sitios, name='Viajes'),
-    path('monumentos', views.monumentos, name='Empleos'),
+    path('restaurantes', views.restaurantes, name='Restaurante'),
+    path('sitios', views.sitios, name='Sitio'),
+    path('monumentos', views.monumentos, name='Monumento'),
 
     path('formHTML', views.form_hmtl),
     path('restaurante-django-forms', views.restaurante_forms_django, name='RestauranteDjangoForms'),
@@ -57,8 +57,8 @@ urlpatterns = [
     path('monumentos', views.MonumentoListView.as_view(), name='monumento-list'),
 
 #SITIO
-    path('sitio/<int:pk>/update', views.update_sitio, name='UpdateViaje'),
-    path('sitio/<int:pk>/delete', views.delete_sitio, name='DeleteViaje'),
+    path('sitio/<int:pk>/update', views.update_sitio, name='UpdateSitio'),
+    path('sitio/<int:pk>/delete', views.delete_sitio, name='DeleteSitio'),
 
     path('sitio/add/', views.SitioCreateView.as_view(), name='sitio-add'),
     path('sitio/<int:pk>/detail', views.SitioDetailView.as_view(), name='sitio-detail'),
