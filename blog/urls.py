@@ -28,9 +28,9 @@ urlpatterns = [
     path('monumentos', views.monumentos, name='Monumento'),
 
     path('formHTML', views.form_html),
-    path('restaurante-django-forms', views.restaurante_forms_django, name='restauranteDjangoForms'),
-    path('sitio-django-forms', views.sitio_forms_django, name='SitioDjangoForms'),
-    path('monumento-django-forms', views.monumento_forms_django, name='MonumentoDjangoForms'),
+    path('restaurante-django-forms', views.restaurante_forms_django, name='RestaurantesDjangoForms'),
+    path('sitio-django-forms', views.sitio_forms_django, name='SitiosDjangoForms'),
+    path('monumento-django-forms', views.monumento_forms_django, name='MonumentosDjangoForms'),
 
     path('search', views.search, name='Search'),
 

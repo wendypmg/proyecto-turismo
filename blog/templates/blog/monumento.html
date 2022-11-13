@@ -3,19 +3,19 @@
 {% block blog_content %}
 
 <h2>Lista de monumentos</h2>
-<a class="card_custom" href="{% url 'blog:monumentoDjangoForms' %}">Crear nuevo Empleo</a>
+<a class="card_custom" href="{% url 'blog:MonumentosDjangoForms' %}">Crear nuevo Monumento visitado</a>
 <hr>
 </hr>
 <ul>
-    {% for empleo in monumento %}
+    {% for monumento in monumentos %}
     <li>
-        {{empleo}}
+        {{monumento}}
         (
-        <a href="{% url 'blog:UpdateEmpleo' empleo.id %}">
+        <a href="{% url 'blog:UpdateMonumento' monumento.id %}">
             <i class="fa fa-pencil" style="color: rgb(0, 0, 190);"></i>
         </a>
         |
-        <a href="{% url 'blog:DeleteEmpleo' empleo.id %}">
+        <a href="{% url 'blog:DeleteMonumento' monumento.id %}">
             <i class="fa fa-trash" style="color: rgb(0, 0, 100);"></i>
         </a>
         )

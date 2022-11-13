@@ -12,7 +12,6 @@ class RestauranteForm(forms.Form):
     ciudad= forms.CharField(max_length=100, label='Ciudad')
     tipo_de_comida= forms.CharField(max_length=100, label='Tipo de comida')
 
-
 class MonumentoForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')
     ciudad= forms.CharField(max_length=100, label='Ciudad')

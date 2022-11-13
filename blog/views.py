@@ -24,7 +24,7 @@ def restaurantes(request):
     return render(
         request=request,
         context=context_dict,
-        template_name="blog/restaurantes.html"
+        template_name="blog/restaurante.html"
     )
 
 def sitios(request):
@@ -37,7 +37,7 @@ def sitios(request):
     return render(
         request=request,
         context=context_dict,
-        template_name="blog/sitios.html"
+        template_name="blog/sitio.html"
     )
 
 def monumentos(request):
@@ -50,7 +50,7 @@ def monumentos(request):
     return render(
         request=request,
         context=context_dict,
-        template_name="blog/monumentos.html"
+        template_name="blog/monumento.html"
     )
 
 def form_html(request):
@@ -67,7 +67,7 @@ def form_html(request):
         return render(
             request=request,
             context=context_dict,
-            template_name="blog/restaurantes.html"
+            template_name="blog/restaurante.html"
         )
 
     return render(
@@ -90,7 +90,7 @@ def restaurante_forms_django(request):
             return render(
                 request=request,
                 context=context_dict,
-                template_name="blog/restaurantes.html"
+                template_name="blog/restaurante.html"
             )
 
     restaurante_form = RestauranteForm(request.POST)
@@ -118,7 +118,7 @@ def monumento_forms_django(request):
             return render(
                 request=request,
                 context=context_dict,
-                template_name="blog/monumentos.html"
+                template_name="blog/monumento.html"
             )
 
     monumento_form = MonumentoForm(request.POST)
@@ -146,7 +146,7 @@ def sitio_forms_django(request):
             return render(
                 request=request,
                 context=context_dict,
-                template_name="blog/sitios.html"
+                template_name="blog/sitio.html"
             )
 
     sitio_form = SitioForm(request.POST)
@@ -179,7 +179,7 @@ def update_restaurante(request, pk: int):
             return render(
                 request=request,
                 context=context_dict,
-                template_name="blog/restaurantes.html"
+                template_name="blog/restaurante.html"
             )
 
     restaurante_form = RestauranteForm(model_to_dict(restaurante))
@@ -205,7 +205,7 @@ def delete_restaurante(request, pk: int):
         return render(
             request=request,
             context=context_dict,
-            template_name="blog/restaurantes.html"
+            template_name="blog/restaurante.html"
         )
 
     context_dict = {
@@ -237,7 +237,7 @@ def update_monumento(request, pk: int):
             return render(
                 request=request,
                 context=context_dict,
-                template_name="blog/monumentos.html"
+                template_name="blog/monumento.html"
             )
 
     monumento_form = MonumentoForm(model_to_dict(monumento))
@@ -263,7 +263,7 @@ def delete_monumento(request, pk: int):
         return render(
             request=request,
             context=context_dict,
-            template_name="blog/monumentos.html"
+            template_name="blog/monumento.html"
         )
 
     context_dict = {
@@ -294,7 +294,7 @@ def update_sitio(request, pk: int):
             return render(
                 request=request,
                 context=context_dict,
-                template_name="blog/sitios.html"
+                template_name="blog/sitio.html"
             )
 
     sitio_form = SitioForm(model_to_dict(sitio))
@@ -320,7 +320,7 @@ def delete_sitio(request, pk: int):
         return render(
             request=request,
             context=context_dict,
-            template_name="blog/sitios.html"
+            template_name="blog/sitio.html"
         )
 
     context_dict = {
