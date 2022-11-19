@@ -3,19 +3,19 @@
 {% block blog_content %}
 
 <h2>Lista de restaurante</h2>
-<a class="card_custom" href="{% url 'blog:restaurantesDjangoForms' %}">Crear nuevo restaurante</a>
+<a class="card_custom" href="{% url 'blog:RestaurantesDjangoForms' %}">Crear nuevo restaurante</a>
 <hr>
 </hr>
 <ul>
-    {% for restaurante in restaurante %}
+    {% for restaurante in restaurantes %}
     <li>
         {{restaurante}}
         (
-        <a href="{% url 'blog:Updaterestaurante' restaurante.id %}">
+        <a href="{% url 'blog:UpdateRestaurante' restaurante.id %}">
             <i class="fa fa-pencil" style="color: rgb(0, 0, 190);"></i>
         </a>
         |
-        <a href="{% url 'blog:Deleterestaurante' restaurante.id %}">
+        <a href="{% url 'blog:DeleteRestaurante' restaurante.id %}">
             <i class="fa fa-trash" style="color: rgb(0, 0, 100);"></i>
         </a>
         )
