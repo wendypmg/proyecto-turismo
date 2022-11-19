@@ -10,6 +10,10 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.decorators import login_required
+
 
 def index(request):
     return render(request, "blog/home.html")
@@ -217,7 +221,7 @@ def delete_restaurante(request, pk: int):
         template_name='blog/restaurante_confirm_delete.html'
     )
 
-#-------CRUD MONUMENTO
+#CRUD MONUMENTO
 def update_monumento(request, pk: int):
     monumento = Monumento.objects.get(pk=pk)
 
@@ -308,6 +312,7 @@ def update_sitio(request, pk: int):
         template_name='blog/sitio_form.html'
     )
 
+#ELIMINAR
 def delete_sitio(request, pk: int):
     sitio = Sitio.objects.get(pk=pk)
     if request.method == 'POST':
@@ -332,6 +337,7 @@ def delete_sitio(request, pk: int):
         template_name='blog/sitio_confirm_delete.html'
     )
 
+#BUSCAR
 def search(request):
     context_dict = dict()
     if request.GET['text_search']:
@@ -355,7 +361,7 @@ def search(request):
         template_name="blog/home.html",
     )
 
-#----------RESTAURANTE
+#RESTAURANTE
 
 class RestauranteListView(ListView):
     model = Restaurante
@@ -379,7 +385,7 @@ class RestauranteDeleteView(DeleteView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
 
-#-----------MONUMENTO
+#MONUMENTO
 
 class MonumentoListView(ListView):
     model = Monumento
@@ -403,7 +409,7 @@ class MonumentoDeleteView(DeleteView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
 
-#----------SITIOS
+#SITIO
 
 class SitioListView(ListView):
     model = Sitio
@@ -426,3 +432,66 @@ class SitioUpdateView(UpdateView):
 class SitioDeleteView(DeleteView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
+
+#LOGIN
+
+def login_request(request):
+
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():  # Si pasó la validación de Django
+
+            usuario = form.cleaned_data.get('username')
+            contrasenia = form.cleaned_data.get('password')
+
+            user = authenticate(username= usuario, password=contrasenia)
+
+            if user is not None:
+                login(request, user)
+
+                return render(request, "blog/home.html", {"mensaje":f"Bienvenido {usuario}"})
+            else:
+                return render(request, "blog/home.html", {"mensaje":"Datos incorrectos"})
+           
+        else:
+
+            return render(request, "blog/home.html", {"mensaje":"Formulario erroneo"})
+
+    form = AuthenticationForm()
+
+    return render(request, "blog/login.html", {"form": form})
+
+#REGISTRO
+
+def register(request):
+
+    if request.method == 'POST':
+
+        form = UserCreationForm(request.POST)
+        #form = UserRegisterForm(request.POST)
+        if form.is_valid():
+
+                  username = form.cleaned_data['username']
+                  form.save()
+                  return render(request,"blog/home.html" ,  {"mensaje":"Usuario Creado :)"})
+
+    else:
+            form = UserCreationForm()       
+            #form = UserRegisterForm()     
+
+    return render(request,"blog/registro.html" ,  {"form":form})
+
+#LOGOUT
+
+
+
+#DECORADOR
+
+@login_required
+def inicio(request):
+    return render(request, "blog/home.html")
+
+
+
+

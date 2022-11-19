@@ -19,6 +19,7 @@ from django.test import TestCase
 
 from django.urls import path
 from blog import views
+from django.contrib.auth.views import LogoutView
 
 app_name='blog'
 urlpatterns = [
@@ -66,6 +67,18 @@ urlpatterns = [
     path('sitio/<int:pk>/delete', views.SitioDeleteView.as_view(), name='sitio-delete'),
 
     path('sitios', views.SitioListView.as_view(), name='sitio-list'),
+
+#LOGIN
+    path('login', views.login_request, name="Login"),
+
+#REGISTRO
+    path('register', views.register, name='Register'),
+
+#LOGOUT
+    path('logout', LogoutView.as_view(template_name='blog/logout.html'), name='Logout'),
+
+    
+
 ]
 
 
