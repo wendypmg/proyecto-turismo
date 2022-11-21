@@ -7,16 +7,22 @@ from blog.models import Restaurante, Sitio, Monumento
 from blog.forms import RestauranteForm, SitioForm, MonumentoForm
 
 from django.urls import reverse_lazy
+#VIEWS ESPCIALES
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+
+#AUTENTICACION
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
+
+from django.contrib.auth.admin import User
 
 
 def index(request):
-    return render(request, "blog/home.html")
+    return render(request, "blog/index.html")
 
 def restaurantes(request):
     restaurantes = Restaurante.objects.all()
@@ -337,30 +343,6 @@ def delete_sitio(request, pk: int):
         template_name='blog/sitio_confirm_delete.html'
     )
 
-#BUSCAR
-def search(request):
-    context_dict = dict()
-    if request.GET['text_search']:
-        search_param = request.GET['text_search']
-        restaurantes = Restaurante.objects.filter(universidad__contains=search_param)
-        context_dict = {
-            'restaurantes': restaurantes
-        }
-
-    elif request.GET['all_search']:
-        search_param = request.GET['all_search']
-        query = Q(universidad__contains=search_param)
-        restaurantes = Restaurante.objects.filter(query)
-        context_dict = {
-            'restaurante': restaurantes
-        }
-
-    return render(
-        request=request,
-        context=context_dict,
-        template_name="blog/home.html",
-    )
-
 #RESTAURANTE
 
 class RestauranteListView(ListView):
@@ -433,9 +415,9 @@ class SitioDeleteView(DeleteView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
 
-#LOGIN
+#LOGIN - PRUEBA
 
-def login_request(request):
+'''def login_request(request):
 
     if request.method == 'POST':
         form = AuthenticationForm(request, data = request.POST)
@@ -445,7 +427,7 @@ def login_request(request):
             usuario = form.cleaned_data.get('username')
             contrasenia = form.cleaned_data.get('password')
 
-            user = authenticate(username= usuario, password=contrasenia)
+            #user = authenticate(username= usuario, password=contrasenia)
 
             if user is not None:
                 login(request, user)
@@ -460,11 +442,11 @@ def login_request(request):
 
     form = AuthenticationForm()
 
-    return render(request, "blog/login.html", {"form": form})
+    return render(request, "blog/login.html", {"form": form})'''
 
-#REGISTRO
+#REGISTRO - PRUEBA
 
-def register(request):
+'''def register(request):
 
     if request.method == 'POST':
 
@@ -480,9 +462,20 @@ def register(request):
             form = UserCreationForm()       
             #form = UserRegisterForm()     
 
-    return render(request,"blog/registro.html" ,  {"form":form})
+    return render(request,"blog/registro.html" ,  {"form":form})'''
+
+#LOGIN
+class BlogLogin(LoginView):
+    template_name = 'blog/blog_login.html'
+    next_page = reverse_lazy("Home")
 
 #LOGOUT
+class BlogLogout(LogoutView):
+    template_name = 'blog/blog_logout.html'
+
+#REGISTRO
+
+
 
 
 
