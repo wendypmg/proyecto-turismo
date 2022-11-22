@@ -7,10 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="POST">
+    <form method="POST">
         {% csrf_token %}
-            {{ form.as_p }}
-        <button type="submit">Inciar sesion</button>
+        {{form.as_p}}
+        <button type="submit">Login</button>
+    </form>
+    <!-- <a href="">create an account</a> -->
     </form>
 </body>
 </html>
