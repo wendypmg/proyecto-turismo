@@ -1,0 +1,13 @@
+{% extends "home/index.html" %}
+{% load static %}
+{% block FinalProject_content %}
+
+
+{% if user.is_authenticated %}
+<div class="text-center">
+    <h2>Bienvenido {{ user.username }}</h2>
+    <h3><a style="color: rgb(3, 36, 184)" href="{% url 'user:avatar-load' %}">Cambiar Avatar</a></h3>
+    <img height="160px" src="{{url}}" alt="">
+</div>
+{% endif %}
+{% endblock %}
