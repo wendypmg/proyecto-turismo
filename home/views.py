@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.db.models import Q
+from django.contrib.auth.models import User
 
-from user.models import Avatar
+
+from blog.models import Avatar
 
 def home(request):
     avatar_ctx = get_avatar_url_ctx(request)

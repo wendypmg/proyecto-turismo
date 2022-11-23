@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.db.models import Q
 from django.forms.models import model_to_dict
 
-from blog.models import Restaurante, Sitio, Monumento
-from blog.forms import RestauranteForm, SitioForm, MonumentoForm
+from blog.models import *
+from blog.forms import *
 
 from django.urls import reverse_lazy
 #VIEWS ESPCIALES
@@ -13,13 +13,13 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 #AUTENTICACION
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+import os
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView, LogoutView
-
-from django.contrib.auth.admin import User
-
+from django.forms.models import model_to_dict
+from django.shortcuts import redirect, render
 
 def index(request):
     return render(request, "blog/index.html")
@@ -416,67 +416,93 @@ class SitioDeleteView(DeleteView):
     success_url = reverse_lazy('blog:sitio-list')
 
 #LOGIN - PRUEBA
-
-'''def login_request(request):
-
+def register(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request, data = request.POST)
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Usuario creado exitosamente!")
+            return redirect("blog:user-login")
+    form = UserRegisterForm()
+    return render(
+        request=request,
+        context={"form":form},
+        template_name="blog/register.html",
+    )
 
-        if form.is_valid():  # Si pasó la validación de Django
 
-            usuario = form.cleaned_data.get('username')
-            contrasenia = form.cleaned_data.get('password')
-
-            #user = authenticate(username= usuario, password=contrasenia)
-
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                return redirect("home:main")
 
-                return render(request, "blog/home.html", {"mensaje":f"Bienvenido {usuario}"})
-            else:
-                return render(request, "blog/home.html", {"mensaje":"Datos incorrectos"})
-           
-        else:
-
-            return render(request, "blog/home.html", {"mensaje":"Formulario erroneo"})
+        return render(
+            request=request,
+            context={'form': form},
+            template_name="blog/login.html",
+        )
 
     form = AuthenticationForm()
+    return render(
+        request=request,
+        context={'form': form},
+        template_name="blog/login.html",
+    )
 
-    return render(request, "blog/login.html", {"form": form})'''
 
-#REGISTRO - PRUEBA
+def logout_request(request):
+      logout(request)
+      return redirect("blog:user-login")
 
-'''def register(request):
 
+@login_required
+def user_update(request):
+    user = request.user
     if request.method == 'POST':
-
-        form = UserCreationForm(request.POST)
-        #form = UserRegisterForm(request.POST)
+        form = UserEditForm(request.POST, instance=request.user)
         if form.is_valid():
+            form.save()
 
-                  username = form.cleaned_data['username']
-                  form.save()
-                  return render(request,"blog/home.html" ,  {"mensaje":"Usuario Creado :)"})
+            return redirect('blog:main')
 
-    else:
-            form = UserCreationForm()       
-            #form = UserRegisterForm()     
-
-    return render(request,"blog/registro.html" ,  {"form":form})'''
-
-#LOGIN
-class BlogLogin(LoginView):
-    template_name = 'blog/blog_login.html'
-    next_page = reverse_lazy("Home")
-
-#LOGOUT
-class BlogLogout(LogoutView):
-    template_name = 'blog/blog_logout.html'
-
-#REGISTRO
+    form= UserEditForm(model_to_dict(user))
+    return render(
+        request=request,
+        context={'form': form},
+        template_name="blog/user_form.html",
+    )
 
 
+@login_required
+def avatar_load(request):
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid  and len(request.FILES) != 0:
+            image = request.FILES['image']
+            avatars = Avatar.objects.filter(user=request.user.id)
+            if not avatars.exists():
+                avatar = Avatar(user=request.user, image=image)
+            else:
+                avatar = avatars[0]
+                if len(avatar.image) > 0:
+                    os.remove(avatar.image.path)
+                avatar.image = image
+            avatar.save()
+            messages.success(request, "Imagen cargada exitosamente")
+            return redirect('blog:main')
 
+    form= AvatarForm()
+    return render(
+        request=request,
+        context={"form": form},
+        template_name="blog/avatar_form.html",
+    )
 
 
 #DECORADOR

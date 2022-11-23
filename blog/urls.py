@@ -35,7 +35,7 @@ urlpatterns = [
     path('sitio-django-forms', sitio_forms_django, name='SitiosDjangoForms'),
     path('monumento-django-forms', monumento_forms_django, name='MonumentosDjangoForms'),
 
-    path('search', search, name='Search'),
+    #path('search', search, name='Search'),
 
 #RESTAURANTE
     path('restaurante/<int:pk>/update', update_restaurante, name='UpdateRestaurante'),
@@ -46,7 +46,7 @@ urlpatterns = [
     path('restaurante/<int:pk>/update', RestauranteUpdateView.as_view(), name='restaurante-update'),
     path('restaurante/<int:pk>/delete', RestauranteDeleteView.as_view(), name='restaurante-delete'),
 
-    path('restaurantes', RestauranteListView.as_view(), name='restaurante-list'),
+    path('restaurantes/', RestauranteListView.as_view(), name='restaurante-list'),
 
 #MONUMENTO
     path('monumento/<int:pk>/update', update_monumento, name='UpdateMonumento'),
@@ -57,7 +57,7 @@ urlpatterns = [
     path('monumento/<int:pk>/update', MonumentoUpdateView.as_view(), name='monumento-update'),
     path('monumento/<int:pk>/delete', MonumentoDeleteView.as_view(), name='monumento-delete'),
 
-    path('monumentos', MonumentoListView.as_view(), name='monumento-list'),
+    path('monumentos/', MonumentoListView.as_view(), name='monumento-list'),
 
 #SITIO
     path('sitio/<int:pk>/update', update_sitio, name='UpdateSitio'),
@@ -71,16 +71,16 @@ urlpatterns = [
     path('sitios/', SitioListView.as_view(), name='sitio-list'),
 
 #LOGIN
-    path('login/', BlogLogin.as_view(), name="Login"),
+    path('login/', login_request, name="Login"),
 
 #REGISTRO
-    #path('register/', register, name='Register'),
+    path('register/', register, name='user-register'),
+    path('register/update', user_update, name='user-update'),
+    path('avatar/load', avatar_load, name='avatar-load'),
 
 #LOGOUT
-    path('logout/', BlogLogout.as_view(), name="Logout"),
+    path('logout/', logout_request, name="Logout"),
 
-    
-
-]
+ ]
 
 
