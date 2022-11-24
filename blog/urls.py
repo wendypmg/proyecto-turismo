@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from django.test import TestCase
 
-from django.urls import path
+from django.urls import path, include
 from blog.views import *
 from django.contrib.auth.views import LogoutView
+from home.views import *
 
 app_name='blog'
 urlpatterns = [
@@ -81,6 +82,16 @@ urlpatterns = [
 #LOGOUT
     path('logout/', logout_request, name="Logout"),
 
+
+#HOME
+    path('home/', include('home.urls')),
+
+
+    path('Angelica', AboutAngelicaView, name='about-Angelica'),
+    path('Wendy', AboutWendyView, name='about-Wendy'),
+    path('Sofia', AboutSofiaView, name='about-Sofia'),
+
  ]
 
+ 
 
