@@ -36,7 +36,7 @@ Una vez inicializad el blog, podrás visitar la url de [Inicio](http://127.0.0.1
 
 ## Creado por:
 
-Este blog fue creado por Wendy, Angelica y Sofia. Trabajamos fuertemente por este resultado y a pesar de las calamidades, hemos logrado dar a luz este pequeño "bebé".
+Este blog fue creado por Wendy Manzanero, Angelica Yanez y Sofia Baili. Trabajamos fuertemente por este resultado y a pesar de las calamidades, hemos logrado dar a luz este pequeño "bebé".
 
 Juntas trabajamos en cada módulo y código.
 
