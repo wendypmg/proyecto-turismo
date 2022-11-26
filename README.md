@@ -43,3 +43,7 @@ Juntas trabajamos en cada módulo y código.
 Esperamos esté acorde a las expectativas.
 Gracias.
 
+## Link del Video:
+
+https://www.loom.com/share/a7b0fefc42a44d8a9cb33cb4e892618b
+
