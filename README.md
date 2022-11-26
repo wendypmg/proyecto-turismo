@@ -2,6 +2,10 @@
 
 Se trata de una web de Turismo, donde el usuario puede loguearse e ir cargando los Sitios, Restaurantes y Monumentos que ha visitado para compartir con sus amigos.
 
+Usuario de prueba:
+Usuario: prueba
+Contraseña: prueba123456
+
 ## Instrucciones para ejecutar este proyecto
 
 1. Crear una carpeta en tu computadora
@@ -29,3 +33,13 @@ python manage.py runserver
 ```
 
 Una vez inicializad el blog, podrás visitar la url de [Inicio](http://127.0.0.1:8000/) y comenzar a cargar tus aventuras :) 
+
+## Creado por:
+
+Este blog fue creado por Wendy, Angelica y Sofia. Trabajamos fuertemente por este resultado y a pesar de las calamidades, hemos logrado dar a luz este pequeño "bebé".
+
+Juntas trabajamos en cada módulo y código.
+
+Esperamos esté acorde a las expectativas.
+Gracias.
+
