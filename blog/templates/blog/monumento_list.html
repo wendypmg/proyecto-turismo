@@ -3,7 +3,7 @@
 {% block blog_content %}
 
 <h2>Lista de monumento</h2>
-<a class="card_custom" href="{% url 'blog:estudio-add' %}">Crear nuevo monumento</a>
+<a class="card_custom" href="{% url 'blog:monumento-add' %}">Crear nuevo monumento</a>
 <hr></hr>
 <ul>
     {% for monumento in monumento_list %}

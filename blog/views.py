@@ -63,7 +63,7 @@ def monumentos(request):
         template_name="blog/monumento.html"
     )
 
-def form_html(request):
+'''def form_html(request):
 
     if request.method == 'POST':
         restaurante = Restaurante(nombre=request.POST['nombre'], ciudad=request.POST['ciudad'])
@@ -83,7 +83,7 @@ def form_html(request):
     return render(
         request=request,
         template_name='blog/formHTML.html'
-    )
+    )'''
 
 def restaurante_forms_django(request):
     if request.method == 'POST':
@@ -355,7 +355,7 @@ class RestauranteDetailView(DetailView):
 
 class RestauranteCreateView(CreateView):
     model = Restaurante
-    success_url = reverse_lazy('blog:restaurante-list')
+    success_url = reverse_lazy('blog:restaurante-add')
     fields = ['nombre', 'ciudad', 'tipo_de_comida']
 
 class RestauranteUpdateView(UpdateView):
@@ -422,7 +422,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Usuario creado exitosamente!")
-            return redirect("blog:user-login")
+            return redirect("blog:Login")
     form = UserRegisterForm()
     return render(
         request=request,
@@ -440,7 +440,7 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("home:main")
+                return redirect("blog:Login")
 
         return render(
             request=request,
@@ -458,7 +458,7 @@ def login_request(request):
 
 def logout_request(request):
       logout(request)
-      return redirect("blog:user-login")
+      return redirect("blog:Login")
 
 
 @login_required
@@ -469,7 +469,7 @@ def user_update(request):
         if form.is_valid():
             form.save()
 
-            return redirect('blog:main')
+            return redirect('blog:Home')
 
     form= UserEditForm(model_to_dict(user))
     return render(
@@ -495,7 +495,7 @@ def avatar_load(request):
                 avatar.image = image
             avatar.save()
             messages.success(request, "Imagen cargada exitosamente")
-            return redirect('blog:main')
+            return redirect('blog:Home')
 
     form= AvatarForm()
     return render(

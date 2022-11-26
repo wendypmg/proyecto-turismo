@@ -31,7 +31,7 @@ urlpatterns = [
     path('sitios', sitios, name='Sitio'),
     path('monumentos', monumentos, name='Monumento'),
 
-    path('formHTML', form_html),
+    #path('formHTML', form_html),
     path('restaurante-django-forms', restaurante_forms_django, name='RestaurantesDjangoForms'),
     path('sitio-django-forms', sitio_forms_django, name='SitiosDjangoForms'),
     path('monumento-django-forms', monumento_forms_django, name='MonumentosDjangoForms'),

@@ -1,3 +1,7 @@
 from django.contrib import admin
+from blog.models import *
 
-# Register your models here.
+admin.site.register(Restaurante)
+admin.site.register(Sitio)
+admin.site.register(Monumento)
+
