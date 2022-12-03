@@ -14,6 +14,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 #AUTENTICACION
 import os
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -63,28 +64,8 @@ def monumentos(request):
         template_name="blog/monumento.html"
     )
 
-'''def form_html(request):
 
-    if request.method == 'POST':
-        restaurante = Restaurante(nombre=request.POST['nombre'], ciudad=request.POST['ciudad'])
-        restaurante.save()
-
-        restaurantes = Restaurante.objects.all()
-        context_dict = {
-            'restaurantes': restaurantes
-        }
-
-        return render(
-            request=request,
-            context=context_dict,
-            template_name="blog/restaurante.html"
-        )
-
-    return render(
-        request=request,
-        template_name='blog/formHTML.html'
-    )'''
-
+@login_required
 def restaurante_forms_django(request):
     if request.method == 'POST':
         restaurante_form = RestauranteForm(request.POST)
@@ -113,6 +94,7 @@ def restaurante_forms_django(request):
         template_name='blog/restaurante_django_forms.html'
     )
 
+@login_required
 def monumento_forms_django(request):
     if request.method == 'POST':
         monumento_form = MonumentoForm(request.POST)
@@ -141,6 +123,7 @@ def monumento_forms_django(request):
         template_name='blog/monumento_django_forms.html'
     )
 
+@login_required
 def sitio_forms_django(request):
     if request.method == 'POST':
         sitio_form = SitioForm(request.POST)
@@ -170,6 +153,7 @@ def sitio_forms_django(request):
     )
 
 # -------CRUD RESTAURANTE
+@login_required
 def update_restaurante(request, pk: int):
     restaurante = Restaurante.objects.get(pk=pk)
 
@@ -203,6 +187,7 @@ def update_restaurante(request, pk: int):
         template_name='blog/restaurante_form.html'
     )
 
+@login_required
 def delete_restaurante(request, pk: int):
     restaurante = Restaurante.objects.get(pk=pk)
     if request.method == 'POST':
@@ -228,6 +213,7 @@ def delete_restaurante(request, pk: int):
     )
 
 #CRUD MONUMENTO
+@login_required
 def update_monumento(request, pk: int):
     monumento = Monumento.objects.get(pk=pk)
 
@@ -261,6 +247,7 @@ def update_monumento(request, pk: int):
         template_name='blog/monumento_form.html'
     )
 
+@login_required
 def delete_monumento(request, pk: int):
     monumento = Monumento.objects.get(pk=pk)
     if request.method == 'POST':
@@ -286,6 +273,7 @@ def delete_monumento(request, pk: int):
     )
 
 #-------CRUD SITIOS
+@login_required
 def update_sitio(request, pk: int):
     sitio = Sitio.objects.get(pk=pk)
 
@@ -319,6 +307,7 @@ def update_sitio(request, pk: int):
     )
 
 #ELIMINAR
+@login_required
 def delete_sitio(request, pk: int):
     sitio = Sitio.objects.get(pk=pk)
     if request.method == 'POST':
@@ -353,17 +342,17 @@ class RestauranteDetailView(DetailView):
     model = Restaurante
     template_name = "blog/restaurante_detail.html"
 
-class RestauranteCreateView(CreateView):
+class RestauranteCreateView(LoginRequiredMixin, CreateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-add')
     fields = ['nombre', 'ciudad', 'tipo_de_comida']
 
-class RestauranteUpdateView(UpdateView):
+class RestauranteUpdateView(LoginRequiredMixin, UpdateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
     fields = ['nombre', 'ciudad', 'tipo_de_comida']
 
-class RestauranteDeleteView(DeleteView):
+class RestauranteDeleteView(LoginRequiredMixin, DeleteView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
 
@@ -377,17 +366,17 @@ class MonumentoDetailView(DetailView):
     model = Monumento
     template_name = "blog/monumento_detail.html"
 
-class MonumentoCreateView(CreateView):
+class MonumentoCreateView(LoginRequiredMixin, CreateView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
     fields = ['nombre', 'ciudad', 'fecha']
 
-class MonumentoUpdateView(UpdateView):
+class MonumentoUpdateView(LoginRequiredMixin, UpdateView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
     fields = ['nombre', 'ciudad', 'fecha']
 
-class MonumentoDeleteView(DeleteView):
+class MonumentoDeleteView(LoginRequiredMixin, DeleteView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
 
@@ -401,17 +390,17 @@ class SitioDetailView(DetailView):
     model = Sitio
     template_name = "blog/sitio_detail.html"
 
-class SitioCreateView(CreateView):
+class SitioCreateView(LoginRequiredMixin, CreateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
     fields = ['nombre', 'ciudad']
 
-class SitioUpdateView(UpdateView):
+class SitioUpdateView(LoginRequiredMixin, UpdateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
     fields = ['nombre', 'ciudad']
 
-class SitioDeleteView(DeleteView):
+class SitioDeleteView(LoginRequiredMixin, DeleteView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
 
