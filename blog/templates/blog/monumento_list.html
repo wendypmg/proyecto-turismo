@@ -10,10 +10,11 @@
     <li>
         {{monumento}}
         (
-        <a href="{% url 'blog:monumentodetail' monumento.id %}">
+        <a href="{% url 'blog:monumento-detail' monumento.id %}">
             <i class="fa fa-eye" style="color: rgb(0, 0, 255);"> </i>
         </a>
         |
+        {% if user.is_authenticated %}
         <a href="{% url 'blog:monumento-update' monumento.id %}">
             <i class="fa fa-pencil" style="color: rgb(0, 0, 190);"> </i>
         </a>
@@ -23,6 +24,7 @@
         </a>
         )
     </li>
+        {% endif %}
     {% endfor %}
 </ul>
 

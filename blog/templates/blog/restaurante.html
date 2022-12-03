@@ -10,6 +10,7 @@
     {% for restaurante in restaurantes %}
     <li>
         {{restaurante}}
+        {% if user.is_authenticated %}   
         (
         <a href="{% url 'blog:UpdateRestaurante' restaurante.id %}">
             <i class="fa fa-pencil" style="color: rgb(0, 0, 190);"></i>
@@ -20,6 +21,7 @@
         </a>
         )
     </li>
+        {% endif %}
     {% endfor %}
 </ul>
 
