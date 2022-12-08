@@ -3,11 +3,11 @@
 {% block blog_content %}
 
 
-<h2>Detalle del restaurante</h2>
+<h2>Detalle del restaurante {{ restaurante.nombre }}</h2>
 <hr></hr>
-<p><h4>Nombre de Restaurante: {{ restaurante.nombre }}</h4></p>
 <p><h4>Ciudad: {{ restaurante.ciudad }}</h4></p>
 <p><h4>Tipo de comida que ofrece: {{ restaurante.tipo_de_comida}}</h4></p>
+<p><h4>Comensal: {{ restaurante.owner}}</h4></p>
 
 
 {% if restaurante.image %}

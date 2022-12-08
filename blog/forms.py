@@ -9,7 +9,7 @@ from blog.models import *
 class SitioForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')
     ciudad = forms.CharField(max_length=100, label='Ciudad')
-    #image = forms.ImageField()
+    image = forms.ImageField()
 
     class Meta:
         model = Sitio
@@ -19,6 +19,7 @@ class RestauranteForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')
     ciudad= forms.CharField(max_length=100, label='Ciudad')
     tipo_de_comida= forms.CharField(max_length=100, label='Tipo de comida')
+    image = forms.ImageField()
 
 class MonumentoForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')

@@ -5,17 +5,8 @@ from django.utils.timezone import *
 class Sitio(models.Model):
     nombre = models.CharField(max_length=40)
     ciudad = models.CharField(max_length=100, blank=True)
-    visitante = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     image = models.ImageField(upload_to='sitio', null=True, blank=True)
-    #created_at = models.DateTimeField(auto_now_add=True)
-    #updated_at = models.DateTimeField(auto_now=True)
-
-    '''class Meta:
-        unique_together = (
-            "nombre",
-            "ciudad",
-        )
-        ordering = ["-created_at"]'''
+    owner = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
         
     def __str__(self):
         return f'{self.nombre} -  {self.ciudad}'
@@ -33,10 +24,12 @@ class Restaurante(models.Model):
 class Monumento(models.Model):
     nombre = models.CharField(max_length=40)
     ciudad= models.CharField(max_length=100)
-    fecha= models.IntegerField()
+    image = models.ImageField(upload_to='monumento', null=True, blank=True)
+    owner = models.ForeignKey(User,null=True, on_delete=models.CASCADE)
 
+    
     def __str__(self):
-        return f'{self.nombre} - {self.ciudad} - Fecha: {self.fecha}'
+        return f'{self.nombre} - {self.ciudad}'
 		 
 class Avatar(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

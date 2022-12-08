@@ -5,13 +5,10 @@
 <h2>Formulario para editar monumento {{monumento.nombre}} </h2>
 <hr></hr>
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-
-    {{ monumento_form.as_p }}
-
-    <input type="submit" class="btn btn-primary" value="Guardar monumento" />
-
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Guardar Monumento" />
 </form>
 
 {% endblock %}
