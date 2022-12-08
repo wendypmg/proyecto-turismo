@@ -5,6 +5,9 @@
 <h2>Detalle del Monumento {{ monumento.nombre}}</h2>
 <hr></hr>
 <p><h4>Ciudad: {{ monumento.ciudad }}</h4></p>
+<p><h4>Descripcion: {{ monumento.descripcion }}</h4></p>
+<p><h4>Historia: {{ monumento.historia }}</h4></p>
+
 
 {% if monumento.image %}
 <div style="text-align: center;">
@@ -26,6 +29,14 @@
     </p>
 {% endif %}
 
+<p class="post-meta">
+    Creado por
+    <span style="color: #0b4956;" href="">{{ monumento.owner.username }}</span>
+    ( {{ monumento.created_at }} )
+    <br>
+    Última fecha de actualización ( {{ monumento.updated_at }} )
+</p>
 
 <p><a class="btn2 btn-primary" href="{% url 'blog:monumento-list' %}">Regresar a la lista de Monumentos</a></p>
+
 {% endblock %}

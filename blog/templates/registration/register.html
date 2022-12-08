@@ -6,13 +6,13 @@
 <hr></hr>
 
 {% if form.errors %}
-<p style="color: red">Por favor diligenciar la forma completa.</p>
+<p style="color: red">Por favor, completa los campos correctamente.</p>
 {% endif %}
 
 <form action="" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Registrar Usuario</button>
+    <input type="submit" class="btn btn-primary" value="Registrar usuario" />
 </form>
 
 {% endblock %}

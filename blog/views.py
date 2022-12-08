@@ -125,7 +125,7 @@ class RestauranteDetailView(DetailView):
 class RestauranteCreateView(LoginRequiredMixin, CreateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'image']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'experiencia', 'image']
 
     def form_valid(self, form):
         """Add owner to the new restaurante object"""
@@ -135,7 +135,7 @@ class RestauranteCreateView(LoginRequiredMixin, CreateView):
 class RestauranteUpdateView(LoginRequiredMixin, UpdateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'image']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'experiencia', 'image']
 
 class RestauranteDeleteView(LoginRequiredMixin, DeleteView):
     model = Restaurante
@@ -154,7 +154,7 @@ class MonumentoDetailView(DetailView):
 class MonumentoCreateView(LoginRequiredMixin, CreateView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
-    fields = ['nombre', 'ciudad', 'image']
+    fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
 
     def form_valid(self, form):
         """Add owner to the new restaurante object"""
@@ -164,7 +164,7 @@ class MonumentoCreateView(LoginRequiredMixin, CreateView):
 class MonumentoUpdateView(LoginRequiredMixin, UpdateView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
-    fields = ['nombre', 'ciudad', 'image']
+    fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
 
 class MonumentoDeleteView(LoginRequiredMixin, DeleteView):
     model = Monumento
@@ -183,7 +183,7 @@ class SitioDetailView(DetailView):
 class SitioCreateView(LoginRequiredMixin, CreateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
-    fields = ['nombre', 'ciudad', 'image']
+    fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
        
     def form_valid(self, form):
         """Add owner to the new restaurante object"""
@@ -193,7 +193,7 @@ class SitioCreateView(LoginRequiredMixin, CreateView):
 class SitioUpdateView(LoginRequiredMixin, UpdateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
-    fields = ['nombre', 'ciudad', 'image']
+    fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
 
 class SitioDeleteView(LoginRequiredMixin, DeleteView):
     model = Sitio
@@ -201,48 +201,18 @@ class SitioDeleteView(LoginRequiredMixin, DeleteView):
 
 #LOGIN - PRUEBA
 def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+    form = UserRegisterForm(request.POST) if request.POST else UserRegisterForm()
+    if request.method == "POST":
         if form.is_valid():
             form.save()
             messages.success(request, "Usuario creado exitosamente!")
-            return redirect("blog:Login")
-    form = UserRegisterForm()
+            return redirect("blog:login")
+
     return render(
         request=request,
-        context={"form":form},
-        template_name="blog/register.html",
+        context={"form": form},
+        template_name="registration/register.html",
     )
-
-
-def login_request(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("blog:Home")
-
-        return render(
-            request=request,
-            context={'form': form},
-            template_name="blog/login.html",
-        )
-
-    form = AuthenticationForm()
-    return render(
-        request=request,
-        context={'form': form},
-        template_name="blog/login.html",
-    )
-
-
-def logout_request(request):
-      logout(request)
-      return redirect("blog:Home")
 
 
 @login_required
@@ -252,14 +222,13 @@ def user_update(request):
         form = UserEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-
             return redirect('blog:Home')
 
     form= UserEditForm(model_to_dict(user))
     return render(
         request=request,
         context={'form': form},
-        template_name="blog/user_form.html",
+        template_name="registration/user_form.html",
     )
 
 #AVATAR
@@ -300,7 +269,7 @@ def avatar_load(request):
     return render(
         request=request,
         context={"form": form},
-        template_name="blog/avatar_form.html",
+        template_name="registration/avatar_form.html",
     )
 
 

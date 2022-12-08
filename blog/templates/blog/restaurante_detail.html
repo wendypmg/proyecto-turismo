@@ -7,7 +7,7 @@
 <hr></hr>
 <p><h4>Ciudad: {{ restaurante.ciudad }}</h4></p>
 <p><h4>Tipo de comida que ofrece: {{ restaurante.tipo_de_comida}}</h4></p>
-<p><h4>Comensal: {{ restaurante.owner}}</h4></p>
+<p><h4>Experiencia: {{ restaurante.experiencia }}</h4></p>
 
 
 {% if restaurante.image %}
@@ -31,6 +31,14 @@
 {% endif %}
 
 
-<p><a class="btn2 btn-primary" href="{% url 'blog:restaurante-list' %}">Regresar a la lista de Restaurantes</a></p>
-{% endblock %}
+<p class="post-meta">
+    Creado por
+    <span style="color: #0b4956;" href="">{{ restaurante.owner.username }}</span>
+    ( {{ restaurante.created_at }} )
+    <br>
+    Última fecha de actualización ( {{ restaurante.updated_at }} )
+</p>
 
+<p><a class="btn2 btn-primary" href="{% url 'blog:restaurante-list' %}">Regresar a la lista de Restaurantes</a></p>
+
+{% endblock %}
