@@ -6,6 +6,8 @@
 <h2>Detalle de Sitio Turístico {{ sitio.nombre }}</h2>
 <hr></hr>
 <p><h4>Ciudad: {{ sitio.ciudad }}</h4></p>
+<p><h4>Descripcion: {{ sitio.descripcion }}</h4></p>
+<p><h4>Historia: {{ sitio.historia }}</h4></p>
 
 
 {% if sitio.image %}
@@ -29,8 +31,8 @@
 {% endif %}
 
 
-<p><a class="btn2 btn-primary" href="{% url 'blog:sitio-list' %}">Regresar a la lista de Sitios</a></p>
-{% endblock %}
+
+
 
 <p class="post-meta">
     Creado por
@@ -39,3 +41,8 @@
     <br>
     Última fecha de actualización ( {{ sitio.updated_at }} )
 </p>
+
+
+<p><a class="btn2 btn-primary" href="{% url 'blog:sitio-list' %}">Regresar a la lista de Sitios</a></p>
+
+{% endblock %}

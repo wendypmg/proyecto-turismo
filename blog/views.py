@@ -125,7 +125,7 @@ class RestauranteDetailView(DetailView):
 class RestauranteCreateView(LoginRequiredMixin, CreateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'image']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'experiencia', 'image']
 
     def form_valid(self, form):
         """Add owner to the new restaurante object"""
@@ -135,7 +135,7 @@ class RestauranteCreateView(LoginRequiredMixin, CreateView):
 class RestauranteUpdateView(LoginRequiredMixin, UpdateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'image']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'experiencia', 'image']
 
 class RestauranteDeleteView(LoginRequiredMixin, DeleteView):
     model = Restaurante
@@ -154,7 +154,7 @@ class MonumentoDetailView(DetailView):
 class MonumentoCreateView(LoginRequiredMixin, CreateView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
-    fields = ['nombre', 'ciudad', 'image']
+    fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
 
     def form_valid(self, form):
         """Add owner to the new restaurante object"""
@@ -164,7 +164,7 @@ class MonumentoCreateView(LoginRequiredMixin, CreateView):
 class MonumentoUpdateView(LoginRequiredMixin, UpdateView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
-    fields = ['nombre', 'ciudad', 'image']
+    fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
 
 class MonumentoDeleteView(LoginRequiredMixin, DeleteView):
     model = Monumento
@@ -183,7 +183,7 @@ class SitioDetailView(DetailView):
 class SitioCreateView(LoginRequiredMixin, CreateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
-    fields = ['nombre', 'ciudad', 'image']
+    fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
        
     def form_valid(self, form):
         """Add owner to the new restaurante object"""
@@ -193,7 +193,7 @@ class SitioCreateView(LoginRequiredMixin, CreateView):
 class SitioUpdateView(LoginRequiredMixin, UpdateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
-    fields = ['nombre', 'ciudad', 'image']
+    fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
 
 class SitioDeleteView(LoginRequiredMixin, DeleteView):
     model = Sitio

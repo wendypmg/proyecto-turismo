@@ -9,34 +9,36 @@ from blog.models import *
 class SitioForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')
     ciudad = forms.CharField(max_length=100, label='Ciudad')
+    descripcion = forms.CharField(max_length=250, label='Descripción')
+    historia = forms.CharField(max_length=250, label='Historia')
     image = forms.ImageField()
 
     class Meta:
         model = Sitio
-        fields = ['nombre', 'ciudad', 'image']
+        fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
     
 class RestauranteForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')
-    ciudad= forms.CharField(max_length=100, label='Ciudad')
-    
-    description = forms.CharField(
-        label="Descripción:",
-        required=False,
-        widget=CKEditorWidget(),
-    )
-
-    tipo_de_comida= forms.CharField(max_length=100, label='Tipo de comida')
+    ciudad = forms.CharField(max_length=100, label='Ciudad')
+    tipo_de_comida = forms.CharField(max_length=100, label='Tipo de comida')
+    experiencia = forms.CharField(max_length=250, label='Opinión')
     image = forms.ImageField()
 
     class Meta:
         model = Restaurante
-        fields = ['nombre', 'ciudad', 'description', 'tipo_de_comida', 'image']
+        fields = ['nombre', 'ciudad', 'tipo_de_comida', 'experiencia', 'image']
     
 
 class MonumentoForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')
     ciudad= forms.CharField(max_length=100, label='Ciudad')
-    fecha= forms.IntegerField( label='Fecha')
+    descripcion = forms.CharField(max_length=250, label='Descripción')
+    historia = forms.CharField(max_length=250, label='Historia')
+    image = forms.ImageField()
+
+    class Meta:
+        model = Monumento
+        fields = ['nombre', 'ciudad', 'descripcion', 'historia', 'image']
 
 
 #USUARIO
