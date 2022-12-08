@@ -6,7 +6,6 @@
 <h2>Detalle de Sitio Turístico {{ sitio.nombre }}</h2>
 <hr></hr>
 <p><h4>Ciudad: {{ sitio.ciudad }}</h4></p>
-<p><h4>Visitante: {{ sitio.owner}}</h4></p>
 
 
 {% if sitio.image %}
@@ -32,3 +31,11 @@
 
 <p><a class="btn2 btn-primary" href="{% url 'blog:sitio-list' %}">Regresar a la lista de Sitios</a></p>
 {% endblock %}
+
+<p class="post-meta">
+    Creado por
+    <span style="color: #0b4956;" href="">{{ sitio.owner.username }}</span>
+    ( {{ sitio.created_at }} )
+    <br>
+    Última fecha de actualización ( {{ sitio.updated_at }} )
+</p>

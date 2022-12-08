@@ -30,10 +30,10 @@
                 <a class="navbar-brand" href="{% url 'blog:sitio-list' %}">Sitios</a>
                 {% if user.is_authenticated %}
                 <a class="btn btn-secondary" href="{% url 'blog:user-update' %}">Editar usuario</a>
-                <a class="btn btn-primary" href="{% url 'blog:Logout' %}">Cerrar Sesión</a>
+                <a class="btn btn-primary" href="{% url 'blog:logout' %}">Cerrar Sesión {{ user.username }}</a>
                 <a class="btn btn-primary" href="{% url 'blog:avatar-load' %}">Avatar</a>
                 {% else %}
-                <a class="btn btn-primary" href="{% url 'blog:Login' %}">Iniciar Sesión</a>
+                <a class="btn btn-primary" href="{% url 'blog:login' %}">Iniciar Sesión</a>
                 {% endif %}
             </div>
         </nav>

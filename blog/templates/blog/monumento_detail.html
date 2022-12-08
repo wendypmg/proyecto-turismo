@@ -29,3 +29,11 @@
 
 <p><a class="btn2 btn-primary" href="{% url 'blog:monumento-list' %}">Regresar a la lista de Monumentos</a></p>
 {% endblock %}
+
+<p class="post-meta">
+    Creado por
+    <span style="color: #0b4956;" href="">{{ monumento.owner.username }}</span>
+    ( {{ monumento.created_at }} )
+    <br>
+    Última fecha de actualización ( {{ monumento.updated_at }} )
+</p>

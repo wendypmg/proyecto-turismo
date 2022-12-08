@@ -1,0 +1,23 @@
+{% extends "blog/index.html" %}
+{% load static %}
+{% block blog_content %}
+
+<h2>Login</h2>
+<hr></hr>
+
+
+
+{% if form.errors %}
+<p style="color: red">Combinación de username y password incorrecta, intenta de nuevo.</p>
+{% endif %}
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" class="btn btn-primary" value="Iniciar Sesión" />
+</form>
+ 
+
+<a class="button_custom" href="{% url 'blog:user-register' %}">Registrar nuevo usuario</a>
+
+{% endblock %}

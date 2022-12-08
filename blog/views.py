@@ -201,48 +201,18 @@ class SitioDeleteView(LoginRequiredMixin, DeleteView):
 
 #LOGIN - PRUEBA
 def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+    form = UserRegisterForm(request.POST) if request.POST else UserRegisterForm()
+    if request.method == "POST":
         if form.is_valid():
             form.save()
             messages.success(request, "Usuario creado exitosamente!")
-            return redirect("blog:Login")
-    form = UserRegisterForm()
+            return redirect("blog:login")
+
     return render(
         request=request,
-        context={"form":form},
-        template_name="blog/register.html",
+        context={"form": form},
+        template_name="registration/register.html",
     )
-
-
-def login_request(request):
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("blog:Home")
-
-        return render(
-            request=request,
-            context={'form': form},
-            template_name="blog/login.html",
-        )
-
-    form = AuthenticationForm()
-    return render(
-        request=request,
-        context={'form': form},
-        template_name="blog/login.html",
-    )
-
-
-def logout_request(request):
-      logout(request)
-      return redirect("blog:Home")
 
 
 @login_required
@@ -252,14 +222,13 @@ def user_update(request):
         form = UserEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-
             return redirect('blog:Home')
 
     form= UserEditForm(model_to_dict(user))
     return render(
         request=request,
         context={'form': form},
-        template_name="blog/user_form.html",
+        template_name="registration/user_form.html",
     )
 
 #AVATAR
@@ -300,7 +269,7 @@ def avatar_load(request):
     return render(
         request=request,
         context={"form": form},
-        template_name="blog/avatar_form.html",
+        template_name="registration/avatar_form.html",
     )
 
 

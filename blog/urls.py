@@ -14,12 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
 from django.test import TestCase
-
 from django.urls import path, include
 from blog.views import *
-from django.contrib.auth.views import LogoutView
 from home.views import *
 
 app_name='blog'
@@ -52,8 +49,9 @@ urlpatterns = [
     path('sitios/', SitioListView.as_view(), name='sitio-list'),
 
 #LOGOUT Y LOGIN
-    path('logout/', logout_request, name="Logout"),
-    path('login/', login_request, name="Login"),
+    path('accounts/', include('django.contrib.auth.urls')),
+    ## path('logout/', logout_request, name="Logout"),
+    ## path('login/', login_request, name="Login"),
 
 #REGISTRO Y AVATAR
     path('register/', register, name='user-register'),
