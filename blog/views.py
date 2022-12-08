@@ -25,46 +25,6 @@ from django.shortcuts import redirect, render
 def index(request):
     return render(request, "blog/index.html")
 
-def restaurantes(request):
-    restaurantes = Restaurante.objects.all()
-
-    context_dict = {
-        'restaurantes': restaurantes
-    }
-
-    return render(
-        request=request,
-        context=context_dict,
-        template_name="blog/restaurante.html"
-    )
-
-def sitios(request):
-    sitios = Sitio.objects.all()
-
-    context_dict = {
-        'sitios': sitios
-    }
-
-    return render(
-        request=request,
-        context=context_dict,
-        template_name="blog/sitio.html"
-    )
-
-def monumentos(request):
-    monumentos = Monumento.objects.all()
-
-    context_dict = {
-        'monumentos': monumentos
-    }
-
-    return render(
-        request=request,
-        context=context_dict,
-        template_name="blog/monumento.html"
-    )
-
-
 @login_required
 def restaurante_forms_django(request):
     if request.method == 'POST':
@@ -152,186 +112,6 @@ def sitio_forms_django(request):
         template_name='blog/sitio_django_forms.html'
     )
 
-# -------CRUD RESTAURANTE
-@login_required
-def update_restaurante(request, pk: int):
-    restaurante = Restaurante.objects.get(pk=pk)
-
-    if request.method == 'POST':
-        restaurante_form = RestauranteForm(request.POST)
-        if restaurante_form.is_valid():
-            data = restaurante_form.cleaned_data
-            restaurante.nombre = data['nombre']
-            restaurante.ciudad = data['ciudad']
-            restaurante.tipo_de_comida = data['tipo_de_comida']
-            restaurante.save()
-
-            restaurantes = Restaurante.objects.all()
-            context_dict = {
-                'restaurantes': restaurantes
-            }
-            return render(
-                request=request,
-                context=context_dict,
-                template_name="blog/restaurante.html"
-            )
-
-    restaurante_form = RestauranteForm(model_to_dict(restaurante))
-    context_dict = {
-        'restaurante': restaurante,
-        'restaurante_form': restaurante_form,
-    }
-    return render(
-        request=request,
-        context=context_dict,
-        template_name='blog/restaurante_form.html'
-    )
-
-@login_required
-def delete_restaurante(request, pk: int):
-    restaurante = Restaurante.objects.get(pk=pk)
-    if request.method == 'POST':
-        restaurante.delete()
-
-        restaurantes = Restaurante.objects.all()
-        context_dict = {
-            'restaurantes': restaurantes
-        }
-        return render(
-            request=request,
-            context=context_dict,
-            template_name="blog/restaurante.html"
-        )
-
-    context_dict = {
-        'restaurante': restaurante,
-    }
-    return render(
-        request=request,
-        context=context_dict,
-        template_name='blog/restaurante_confirm_delete.html'
-    )
-
-#CRUD MONUMENTO
-@login_required
-def update_monumento(request, pk: int):
-    monumento = Monumento.objects.get(pk=pk)
-
-    if request.method == 'POST':
-        monumento_form = MonumentoForm(request.POST)
-        if monumento_form.is_valid():
-            data = monumento_form.cleaned_data
-            monumento.nombre = data['nombre']
-            monumento.ciudad = data['ciudad']
-            monumento.fecha = data['fecha']
-            monumento.save()
-
-            monumentos = Monumento.objects.all()
-            context_dict = {
-                'monumentos': monumentos
-            }
-            return render(
-                request=request,
-                context=context_dict,
-                template_name="blog/monumento.html"
-            )
-
-    monumento_form = MonumentoForm(model_to_dict(monumento))
-    context_dict = {
-        'monumento': monumento,
-        'monumento_form': monumento_form,
-    }
-    return render(
-        request=request,
-        context=context_dict,
-        template_name='blog/monumento_form.html'
-    )
-
-@login_required
-def delete_monumento(request, pk: int):
-    monumento = Monumento.objects.get(pk=pk)
-    if request.method == 'POST':
-        monumento.delete()
-
-        monumentos = Monumento.objects.all()
-        context_dict = {
-            'monumentos': monumentos
-        }
-        return render(
-            request=request,
-            context=context_dict,
-            template_name="blog/monumento.html"
-        )
-
-    context_dict = {
-        'monumento': monumento,
-    }
-    return render(
-        request=request,
-        context=context_dict,
-        template_name='blog/monumento_confirm_delete.html'
-    )
-
-#-------CRUD SITIOS
-@login_required
-def update_sitio(request, pk: int):
-    sitio = Sitio.objects.get(pk=pk)
-
-    if request.method == 'POST':
-        sitio_form = SitioForm(request.POST)
-        if sitio_form.is_valid():
-            data = sitio_form.cleaned_data
-            sitio.nombre = data['nombre']
-            sitio.ciudad = data['ciudad']
-            sitio.save()
-
-            sitios = Sitio.objects.all()
-            context_dict = {
-                'sitios': sitios
-            }
-            return render(
-                request=request,
-                context=context_dict,
-                template_name="blog/sitio.html"
-            )
-
-    sitio_form = SitioForm(model_to_dict(sitio))
-    context_dict = {
-        'sitio': sitio,
-        'sitio_form': sitio_form,
-    }
-    return render(
-        request=request,
-        context=context_dict,
-        template_name='blog/sitio_form.html'
-    )
-
-#ELIMINAR
-@login_required
-def delete_sitio(request, pk: int):
-    sitio = Sitio.objects.get(pk=pk)
-    if request.method == 'POST':
-        sitio.delete()
-
-        sitios = Sitio.objects.all()
-        context_dict = {
-            'sitios': sitios
-        }
-        return render(
-            request=request,
-            context=context_dict,
-            template_name="blog/sitio.html"
-        )
-
-    context_dict = {
-        'sitio': sitio,
-    }
-    return render(
-        request=request,
-        context=context_dict,
-        template_name='blog/sitio_confirm_delete.html'
-    )
-
 #RESTAURANTE
 
 class RestauranteListView(ListView):
@@ -344,13 +124,18 @@ class RestauranteDetailView(DetailView):
 
 class RestauranteCreateView(LoginRequiredMixin, CreateView):
     model = Restaurante
-    success_url = reverse_lazy('blog:restaurante-add')
-    fields = ['nombre', 'ciudad', 'tipo_de_comida']
+    success_url = reverse_lazy('blog:restaurante-list')
+    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'image']
+
+    def form_valid(self, form):
+        """Add owner to the new restaurante object"""
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 class RestauranteUpdateView(LoginRequiredMixin, UpdateView):
     model = Restaurante
     success_url = reverse_lazy('blog:restaurante-list')
-    fields = ['nombre', 'ciudad', 'tipo_de_comida']
+    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'image']
 
 class RestauranteDeleteView(LoginRequiredMixin, DeleteView):
     model = Restaurante
@@ -369,12 +154,17 @@ class MonumentoDetailView(DetailView):
 class MonumentoCreateView(LoginRequiredMixin, CreateView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
-    fields = ['nombre', 'ciudad', 'fecha']
+    fields = ['nombre', 'ciudad', 'image']
+
+    def form_valid(self, form):
+        """Add owner to the new restaurante object"""
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 class MonumentoUpdateView(LoginRequiredMixin, UpdateView):
     model = Monumento
     success_url = reverse_lazy('blog:monumento-list')
-    fields = ['nombre', 'ciudad', 'fecha']
+    fields = ['nombre', 'ciudad', 'image']
 
 class MonumentoDeleteView(LoginRequiredMixin, DeleteView):
     model = Monumento
@@ -393,12 +183,17 @@ class SitioDetailView(DetailView):
 class SitioCreateView(LoginRequiredMixin, CreateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
-    fields = ['nombre', 'ciudad']
+    fields = ['nombre', 'ciudad', 'image']
+       
+    def form_valid(self, form):
+        """Add owner to the new restaurante object"""
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 class SitioUpdateView(LoginRequiredMixin, UpdateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
-    fields = ['nombre', 'ciudad']
+    fields = ['nombre', 'ciudad', 'image']
 
 class SitioDeleteView(LoginRequiredMixin, DeleteView):
     model = Sitio
@@ -429,7 +224,7 @@ def login_request(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("blog:Login")
+                return redirect("blog:Home")
 
         return render(
             request=request,
@@ -447,7 +242,7 @@ def login_request(request):
 
 def logout_request(request):
       logout(request)
-      return redirect("blog:Login")
+      return redirect("blog:Home")
 
 
 @login_required
@@ -466,6 +261,21 @@ def user_update(request):
         context={'form': form},
         template_name="blog/user_form.html",
     )
+
+#AVATAR
+def get_avatar_url_ctx(request):
+    avatars = Avatar.objects.filter(user=request.user.id)
+    if avatars.exists():
+        return {"avatar_url": avatars[0].image.url}
+    return {}
+
+
+def index(request):
+    return render(
+        request=request,
+        context=get_avatar_url_ctx(request),
+        template_name="blog/index.html",
+    ) 
 
 
 @login_required
@@ -499,6 +309,7 @@ def avatar_load(request):
 @login_required
 def inicio(request):
     return render(request, "blog/home.html")
+
 
 
 

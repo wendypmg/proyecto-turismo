@@ -2,14 +2,12 @@
 {% load static %}
 {% block blog_content %}
 
-<h2>Formulario para editar sitios turisticos {{sitio.nombre}} </h2>
+<h2>Formulario para editar Sitio Turístico {{sitio.nombre}} </h2>
 <hr></hr>
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-
-    {{ sitio_form.as_p }}
-
+    {{ form.as_p }}
     <input type="submit" class="btn btn-primary" value="Guardar sitio" />
 
 </form>

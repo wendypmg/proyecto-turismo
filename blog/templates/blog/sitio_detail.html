@@ -2,9 +2,33 @@
 {% load static %}
 {% block blog_content %}
 
-<h2>Detalle del Sitio</h2>
+
+<h2>Detalle de Sitio Turístico {{ sitio.nombre }}</h2>
 <hr></hr>
-<p><h3>nombre: {{ sitio.nombre }}</h3></p>
-<p><h4>ciudad: {{ sitio.ciudad }}</h4></p>
+<p><h4>Ciudad: {{ sitio.ciudad }}</h4></p>
+<p><h4>Visitante: {{ sitio.owner}}</h4></p>
+
+
+{% if sitio.image %}
+<div style="text-align: center;">
+    <img height="250px" src="{{ sitio.image.url }}">
+</div>
+{% endif %}
+
+
+<!-- Update-Delete link only for the owner -->
+{% if user == sitio.owner or user.is_superuser %}
+    <p style="text-align: center">
+        <a href="{% url 'blog:sitio-update' sitio.id %}">
+            <i class="fa fa-pencil" style="color: #1c1c91;"></i> Editar Sitio
+        </a>
+        &ensp; | &ensp;
+        <a href="{% url 'blog:sitio-delete' sitio.id %}">
+            <i class="fa fa-trash" style="color: #881a1a;"></i> Eliminar Sitio
+        </a>
+    </p>
+{% endif %}
+
+
 <p><a class="btn2 btn-primary" href="{% url 'blog:sitio-list' %}">Regresar a la lista de Sitios</a></p>
 {% endblock %}

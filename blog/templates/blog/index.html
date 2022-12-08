@@ -25,12 +25,13 @@
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'blog:Home' %}">Home</a>
-                <a class="navbar-brand" href="{% url 'blog:Restaurante' %}">Restaurantes</a>
-                <a class="navbar-brand" href="{% url 'blog:Monumento' %}">Monumentos</a>
-                <a class="navbar-brand" href="{% url 'blog:Sitio' %}">Sitios</a>
+                <a class="navbar-brand" href="{% url 'blog:restaurante-list' %}">Restaurantes</a>
+                <a class="navbar-brand" href="{% url 'blog:monumento-list' %}">Monumentos</a>
+                <a class="navbar-brand" href="{% url 'blog:sitio-list' %}">Sitios</a>
                 {% if user.is_authenticated %}
                 <a class="btn btn-secondary" href="{% url 'blog:user-update' %}">Editar usuario</a>
                 <a class="btn btn-primary" href="{% url 'blog:Logout' %}">Cerrar Sesión</a>
+                <a class="btn btn-primary" href="{% url 'blog:avatar-load' %}">Avatar</a>
                 {% else %}
                 <a class="btn btn-primary" href="{% url 'blog:Login' %}">Iniciar Sesión</a>
                 {% endif %}
@@ -47,8 +48,22 @@
                             <div class="text-lg-start text-white">
                                 {% block blog_content %}
 
+
+                            <div class="site-heading">
+                                {% if user.is_authenticated %}
+                                    <h4>Bienvenido</h4>
+                                    <h3>{{ user.username }}</h3>
+                                {% else %}
+                                    <h6 align="center">Si deseas agregar tus aventuras, tienes que loguearte</h6>
+                                    <span class="subheading"> </span>
+                                {% endif %}
+                                {% if avatar_url %}
+                                    <a href="{% url 'blog:avatar-load' %}"><img height="120px" src="{{avatar_url}}"></a>
+                                {% endif %}
+                                
                                 {% endblock %}
                             </div>
+                            </div>   
                         </div>
                     </div>
                 </div>

@@ -2,17 +2,13 @@
 {% load static %}
 {% block blog_content %}
 
-<h2>Alta de nuevo Sitios</h2>
+<h2>Alta de nuevo Sitio Turístico</h2>
 <hr></hr>
 
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-
-    <table>
-        {{ sitio_form.as_table }}
-    </table>
-
-    <input type="submit" class="btn btn-primary" value="Crear sitio" />
+    {{ sitio_form.as_table }}
+    <input type="submit" class="btn btn-primary" value="Crear Sitio" />
 
 </form>
 
