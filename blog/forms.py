@@ -8,7 +8,12 @@ from blog.models import *
 #TURISMO
 class SitioForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')
-    ciudad= forms.CharField(max_length=100, label='Ciudad')
+    ciudad = forms.CharField(max_length=100, label='Ciudad')
+    #image = forms.ImageField()
+
+    class Meta:
+        model = Sitio
+        fields = ['nombre', 'ciudad', 'image']
     
 class RestauranteForm(forms.Form):
     nombre = forms.CharField(max_length=40, label='Nombre')
@@ -42,7 +47,7 @@ class UserEditForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name' ]
+        fields = ['email', 'first_name', 'last_name']
         widgets = {
             'email': forms.TextInput(attrs={'readonly': 'readonly'}),
         }

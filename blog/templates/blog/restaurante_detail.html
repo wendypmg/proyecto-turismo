@@ -2,11 +2,35 @@
 {% load static %}
 {% block blog_content %}
 
+
 <h2>Detalle del restaurante</h2>
 <hr></hr>
-<p><h3>nombre: {{ restaurante.nombre }}</h3></p>
-<p><h4>ciudad: {{ restaurante.ciudad }}</h4></p>
-<p><h3>tipo de comida: {{ restaurante.tipo_de_comida}}</h3></p>
+<p><h4>Nombre de Restaurante: {{ restaurante.nombre }}</h4></p>
+<p><h4>Ciudad: {{ restaurante.ciudad }}</h4></p>
+<p><h4>Tipo de comida que ofrece: {{ restaurante.tipo_de_comida}}</h4></p>
 
-<p><a class="btn2 btn-primary" href="{% url 'blog:restaurante-list' %}">Regresar a la lista de restaurante</a></p>
+
+{% if restaurante.image %}
+<div style="text-align: center;">
+    <img height="250px" src="{{ restaurante.image.url }}">
+</div>
+{% endif %}
+
+
+<!-- Update-Delete link only for the owner -->
+{% if user == restaurante.owner or user.is_superuser %}
+    <p style="text-align: center">
+        <a href="{% url 'blog:restaurante-update' restaurante.id %}">
+            <i class="fa fa-pencil" style="color: #1c1c91;"></i> Editar Restaurante
+        </a>
+        &ensp; | &ensp;
+        <a href="{% url 'blog:restaurante-delete' restaurante.id %}">
+            <i class="fa fa-trash" style="color: #881a1a;"></i> Eliminar Restaurante
+        </a>
+    </p>
+{% endif %}
+
+
+<p><a class="btn2 btn-primary" href="{% url 'blog:restaurante-list' %}">Regresar a la lista de Restaurantes</a></p>
 {% endblock %}
+

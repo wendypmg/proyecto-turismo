@@ -33,6 +33,9 @@
                 <a class="btn btn-primary" href="{% url 'blog:Logout' %}">Cerrar Sesión</a>
                 {% else %}
                 <a class="btn btn-primary" href="{% url 'blog:Login' %}">Iniciar Sesión</a>
+                {% if not avatar_url %}
+                <a class="btn btn-primary" href="{% url 'blog:avatar-load' %}">Cargar Avatar</a>
+                {% endif %}
                 {% endif %}
             </div>
         </nav>
@@ -47,8 +50,22 @@
                             <div class="text-lg-start text-white">
                                 {% block blog_content %}
 
+
+                            <div class="site-heading">
+                                {% if user.is_authenticated %}
+                                    <h4>Bienvenido</h4>
+                                    <h3>{{ user.username }}</h3>
+                                {% else %}
+                                    <h1>Clean Blog</h1>
+                                    <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                                {% endif %}
+                                {% if avatar_url %}
+                                    <a href="{% url 'blog:avatar-load' %}"><img height="120px" src="{{avatar_url}}"></a>
+                                {% endif %}
+                                
                                 {% endblock %}
                             </div>
+                            </div>   
                         </div>
                     </div>
                 </div>

@@ -344,8 +344,13 @@ class RestauranteDetailView(DetailView):
 
 class RestauranteCreateView(LoginRequiredMixin, CreateView):
     model = Restaurante
-    success_url = reverse_lazy('blog:restaurante-add')
-    fields = ['nombre', 'ciudad', 'tipo_de_comida']
+    success_url = reverse_lazy('blog:restaurante-list')
+    fields = ['nombre', 'ciudad', 'tipo_de_comida', 'image']
+
+    def form_valid(self, form):
+        """Add owner to the new restaurante object"""
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
 
 class RestauranteUpdateView(LoginRequiredMixin, UpdateView):
     model = Restaurante
@@ -398,7 +403,7 @@ class SitioCreateView(LoginRequiredMixin, CreateView):
 class SitioUpdateView(LoginRequiredMixin, UpdateView):
     model = Sitio
     success_url = reverse_lazy('blog:sitio-list')
-    fields = ['nombre', 'ciudad']
+    fields = ['nombre', 'ciudad', 'image']
 
 class SitioDeleteView(LoginRequiredMixin, DeleteView):
     model = Sitio
@@ -467,6 +472,21 @@ def user_update(request):
         template_name="blog/user_form.html",
     )
 
+#AVATAR
+def get_avatar_url_ctx(request):
+    avatars = Avatar.objects.filter(user=request.user.id)
+    if avatars.exists():
+        return {"avatar_url": avatars[0].image.url}
+    return {}
+
+
+def index(request):
+    return render(
+        request=request,
+        context=get_avatar_url_ctx(request),
+        template_name="blog/index.html",
+    ) 
+
 
 @login_required
 def avatar_load(request):
@@ -499,6 +519,7 @@ def avatar_load(request):
 @login_required
 def inicio(request):
     return render(request, "blog/home.html")
+
 
 
 

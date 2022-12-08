@@ -39,9 +39,6 @@ urlpatterns = [
     #path('search', search, name='Search'),
 
 #RESTAURANTE
-    path('restaurante/<int:pk>/update', update_restaurante, name='UpdateRestaurante'),
-    path('restaurante/<int:pk>/delete', delete_restaurante, name='DeleteRestaurante'),
-
     path('restaurante/add/', RestauranteCreateView.as_view(), name='restaurante-add'),
     path('restaurante/<int:pk>/detail', RestauranteDetailView.as_view(), name='restaurante-detail'),
     path('restaurante/<int:pk>/update', RestauranteUpdateView.as_view(), name='restaurante-update'),

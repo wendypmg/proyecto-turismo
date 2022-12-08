@@ -2,30 +2,30 @@
 {% load static %}
 {% block blog_content %}
 
+
 <h2>Lista de restaurante</h2>
-<a class="card_custom" href="{% url 'blog:RestaurantesDjangoForms' %}">Crear nuevo restaurante</a>
+<a class="card_custom" href="{% url 'blog:restaurante-add' %}">Crear nuevo restaurante</a>
 <hr></hr>
 <ul>
     {% for restaurante in restaurante_list %}
     <li>
         {{restaurante}}
-        {% if user.is_authenticated %}   
         (
-        <a href="{% url 'blog:restaurante-detail' restaurante.id %}">
-            <i class="fa fa-eye" style="color: rgb(0, 0, 255);"> </i>
-        </a>
-        |
-        <a href="{% url 'blog:restaurante-update' restaurante.id %}">
-            <i class="fa fa-pencil" style="color: rgb(0, 0, 190);"> </i>
-        </a>
-        |
-        <a href="{% url 'blog:restaurante-delete' restaurante.id %}">
-            <i class="fa fa-trash" style="color: rgb(0, 0, 100);"> </i>
-        </a>
+            <a href="{% url 'blog:restaurante-detail' restaurante.id %}">
+                <i class="fa fa-eye" style="color: rgb(0, 0, 255);"> </i>
+            </a>
+        {% if user.is_superuser or restaurante.owner == user %}
+            |
+            <a href="{% url 'blog:restaurante-update' restaurante.id %}">
+                <i class="fa fa-pencil" style="color: rgb(0, 0, 190);"> </i>
+            </a>
+            |
+            <a href="{% url 'blog:restaurante-delete' restaurante.id %}">
+                <i class="fa fa-trash" style="color: rgb(0, 0, 100);"> </i>
+            </a>
+        {% endif %}
         )
     </li>
-        {% endif %}
     {% endfor %}
 </ul>
-
 {% endblock %}
